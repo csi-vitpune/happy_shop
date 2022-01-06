@@ -13,6 +13,7 @@ import '../screens/edit_product_screen.dart';
 import '../screens/auth_screen.dart';
 import '../provider/auth.dart';
 import './screens/splachscreen.dart';
+import './screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,12 +53,13 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-              primarySwatch: Colors.purple,
+              primaryColor: Color(0xFF397df1),
+              primarySwatch: Colors.blue,
               accentColor: Colors.deepOrange,
               fontFamily: 'Lato'),
           routes: {
             '/': (ctx) => auth.isAuth
-                ? ProductOverviewScreen()
+                ? ProductOverviewScreen()//HomeScreen()//ProductOverviewScreen()
                 : FutureBuilder(
                     future: auth.autoLogging(),
                     builder: (ctx, authResSnap) =>

@@ -22,15 +22,16 @@ class AuthScreen extends StatelessWidget {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Theme.of(context).primaryColor.withOpacity(0.9),
-                  Theme.of(context).accentColor.withOpacity(0.7),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0, 1],
-              ),
+              color: Colors.white
+              // gradient: LinearGradient(
+              //   colors: [
+              //     Theme.of(context).primaryColor.withOpacity(0.9),
+              //     Theme.of(context).accentColor.withOpacity(0.7),
+              //   ],
+              //   begin: Alignment.topLeft,
+              //   end: Alignment.bottomRight,
+              //   stops: [0, 1],
+              // ),
             ),
           ),
           SingleChildScrollView(
@@ -38,37 +39,41 @@ class AuthScreen extends StatelessWidget {
               height: deviceSize.height,
               width: deviceSize.width,
               child: Column(
+                mainAxisSize: MainAxisSize.min,
+               // mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Flexible(
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 20.0),
+                    child:  
+                    Container(
+                      //margin: EdgeInsets.only(bottom: 5.0),
                       padding:
-                          EdgeInsets.symmetric(vertical: 8.0, horizontal: 94.0),
-                      transform: Matrix4.rotationZ(-8 * pi / 180)
-                        ..translate(-10.0),
+                          EdgeInsets.symmetric(horizontal: 94.0),
+                      // transform: Matrix4.rotationZ(-8 * pi / 180)
+                      //   ..translate(-10.0),
                       // ..translate(-10.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Theme.of(context).primaryColor,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 8,
-                            color: Colors.black26,
-                            offset: Offset(0, 2),
-                          )
-                        ],
-                      ),
-                      child: Text(
-                        'MyShop',
-                        style: TextStyle(
-                          color: Colors.white, //Theme.of(context).accentColor,
-                          fontSize: 50,
-                          fontFamily: 'Anton',
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
+                      // decoration: BoxDecoration(
+                      //   borderRadius: BorderRadius.circular(20),
+                      //   color: Theme.of(context).primaryColor,
+                      //   boxShadow: [
+                      //     BoxShadow(
+                      //       blurRadius: 8,
+                      //       color: Colors.black26,
+                      //       offset: Offset(0, 2),
+                      //     )
+                      //   ],
+                      // ),
+                      child: Image.asset('assets/logo/happy_shop.png')
+                      // Text(
+                      //   'MyShop',
+                      //   style: TextStyle(
+                      //     color: Colors.white, //Theme.of(context).accentColor,
+                      //     fontSize: 50,
+                      //     fontFamily: 'Anton',
+                      //     fontWeight: FontWeight.normal,
+                      //   ),
+                      // ),
                     ),
                   ),
                   Flexible(
@@ -207,10 +212,12 @@ class _AuthCardState extends State<AuthCard>
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
+
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
       elevation: 8.0,
+      shadowColor: Colors.white70,
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
 
@@ -220,7 +227,7 @@ class _AuthCardState extends State<AuthCard>
         constraints:
             BoxConstraints(minHeight: _authMode == AuthMode.Signup ? 320 : 260),
         width: deviceSize.width * 0.75,
-        padding: EdgeInsets.all(16.0),
+       padding: EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -229,6 +236,7 @@ class _AuthCardState extends State<AuthCard>
                 TextFormField(
                   decoration: InputDecoration(labelText: 'E-Mail'),
                   keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value!.isEmpty || !value.contains('@')) {
                       return 'Invalid email!';
@@ -244,6 +252,7 @@ class _AuthCardState extends State<AuthCard>
                   decoration: InputDecoration(labelText: 'Password'),
                   obscureText: true,
                   controller: _passwordController,
+                  textInputAction: _authMode==AuthMode.Signup? TextInputAction.next : TextInputAction.done,
                   validator: (value) {
                     if (value!.isEmpty || value.length < 5) {
                       return 'Password is too short!';

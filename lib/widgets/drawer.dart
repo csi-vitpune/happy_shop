@@ -16,6 +16,7 @@ class AppDrawer extends StatelessWidget {
           AppBar(
             title: Text('Hello User!'),
           ),
+
           Divider(),
           ListTile(
             leading: Icon(Icons.shop),
